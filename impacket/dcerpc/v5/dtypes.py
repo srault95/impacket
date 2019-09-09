@@ -9,8 +9,8 @@
 # Description:
 #   [MS-DTYP] Interface mini implementation
 #
-from __future__ import division
-from __future__ import print_function
+
+
 from struct import pack
 from six import binary_type
 

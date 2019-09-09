@@ -9,8 +9,8 @@
 # Description:
 #   SMB 2 and 3 Protocol Structures and constants [MS-SMB2]
 #
-from __future__ import division
-from __future__ import print_function
+
+
 
 from impacket.structure import Structure
 

@@ -42,8 +42,8 @@
 # https://www.exploit-db.com/docs/english/18244-active-domain-offline-hash-dump-&-forensic-analysis.pdf
 # https://www.passcape.com/index.php?section=blog&cmd=details&id=15
 #
-from __future__ import division
-from __future__ import print_function
+
+
 import codecs
 import hashlib
 import logging
@@ -1753,7 +1753,7 @@ class NTDSHashes:
         0xffffff74:'rc4_hmac',
     }
 
-    INTERNAL_TO_NAME = dict((v,k) for k,v in NAME_TO_INTERNAL.items())
+    INTERNAL_TO_NAME = dict((v,k) for k,v in list(NAME_TO_INTERNAL.items()))
 
     SAM_NORMAL_USER_ACCOUNT = 0x30000000
     SAM_MACHINE_ACCOUNT     = 0x30000001

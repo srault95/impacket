@@ -18,8 +18,8 @@
 #       https://www.passcape.com/windows_password_recovery_vault_explorer
 #       https://www.passcape.com/windows_password_recovery_dpapi_master_key
 #
-from __future__ import division
-from __future__ import print_function
+
+
 import sys
 
 from struct import unpack
@@ -130,7 +130,7 @@ ALG_SID_SCHANNEL_ENC_KEY        = 7
 ALG_SID_ECMQV                   = 1
 
 def getFlags(myenum, flags):
-    return '|'.join([name for name, member in myenum.__members__.items() if member.value & flags])
+    return '|'.join([name for name, member in list(myenum.__members__.items()) if member.value & flags])
 
 class FLAGS(Enum):
     CRYPTPROTECT_UI_FORBIDDEN = 0x1
@@ -1031,7 +1031,7 @@ def privatekeyblob_to_pkcs1(key):
     privateExp = bytes_to_long(key['privateExponent'][::-1]) # d
     if PY3:
         long = int
-    pubExp = long(key['rsapubkey']['pubexp']) # e
+    pubExp = int(key['rsapubkey']['pubexp']) # e
     # RSA.Integer(prime2).inverse(prime1) # u
 
     r = RSA.construct((modulus, pubExp, privateExp, prime1, prime2))

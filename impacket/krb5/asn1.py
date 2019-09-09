@@ -75,7 +75,7 @@ def seq_set(seq, name, builder=None, *args, **kwargs):
 
 def seq_set_dict(seq, name, pairs, *args, **kwargs):
     component = seq.setComponentByName(name).getComponentByName(name)
-    for k, v in pairs.items():
+    for k, v in list(pairs.items()):
         component.setComponentByName(k, v)
 
 def seq_set_iter(seq, name, iterable):
@@ -93,7 +93,7 @@ def seq_append(seq, name, pairs):
     index = len(component)
     element = component.setComponentByPosition(index
                                                ).getComponentByPosition(index)
-    for k, v in pairs.items():
+    for k, v in list(pairs.items()):
         element.setComponentByName(k, v)
 
 class Int32(univ.Integer):

@@ -4,8 +4,8 @@
 # of the Apache Software License. See the accompanying LICENSE file
 # for more information.
 #
-from __future__ import division
-from __future__ import print_function
+
+
 from struct import pack, unpack, calcsize
 from six import b, PY3
 
@@ -612,7 +612,7 @@ def pretty_print(x):
     if chr(x) in '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ':
        return chr(x)
     else:
-       return u'.'
+       return '.'
 
 def hexdump(data, indent = ''):
     if data is None:
@@ -628,7 +628,7 @@ def hexdump(data, indent = ''):
             if i+j < strLen:
                 line += "%02X " % x[i+j]
             else:
-                line += u"   "
+                line += "   "
             if j%16 == 7:
                 line += " "
         line += "  "

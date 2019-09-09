@@ -9,8 +9,8 @@
 # Description:
 #   Transport implementations for the DCE/RPC protocol.
 #
-from __future__ import division
-from __future__ import print_function
+
+
 
 import binascii
 import os

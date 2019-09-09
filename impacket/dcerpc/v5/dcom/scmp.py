@@ -19,8 +19,8 @@
 #   classes described in the standards developed. 
 #   There are test cases for them too. 
 #
-from __future__ import division
-from __future__ import print_function
+
+
 from impacket.dcerpc.v5.ndr import NDRENUM, NDRSTRUCT, NDRUNION
 from impacket.dcerpc.v5.dcomrt import PMInterfacePointer, INTERFACE, DCOMCALL, DCOMANSWER, IRemUnknown2
 from impacket.dcerpc.v5.dtypes import LONG, LONGLONG, ULONG, WSTR

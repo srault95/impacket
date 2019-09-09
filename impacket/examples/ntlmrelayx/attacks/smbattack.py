@@ -103,7 +103,7 @@ class SMBAttack(ProtocolAttack):
                     self.__answerTMP = ''
                     self.__SMBConnection.getFile('ADMIN$', 'Temp\\__output', self.__answer)
                     self.__SMBConnection.deleteFile('ADMIN$', 'Temp\\__output')
-                    print(self.__answerTMP.decode(self.config.encoding, 'replace'))
+                    print((self.__answerTMP.decode(self.config.encoding, 'replace')))
                 else:
                     bootKey = remoteOps.getBootKey()
                     remoteOps._RemoteOperations__serviceDeleted = True

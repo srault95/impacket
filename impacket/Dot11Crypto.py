@@ -14,7 +14,7 @@ class RC4():
     def __init__(self, key):
         bkey = bytearray(key)
         j = 0
-        self.state = bytearray(range(256))
+        self.state = bytearray(list(range(256)))
         for i in range(256):
             j = (j + self.state[i] + bkey[i % len(key)]) & 0xff
             self.state[i],self.state[j] = self.state[j],self.state[i] # SSWAP(i,j)

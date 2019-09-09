@@ -64,7 +64,7 @@ If the value contains no realm, then default_realm will be used."""
             return
 
         try:               # Python 2
-            if isinstance(value, unicode):
+            if isinstance(value, str):
                 value = value.encode('utf-8')
         except NameError:  # Python 3
             if isinstance(value, bytes):
@@ -260,15 +260,15 @@ class KerberosTime(object):
 
 if __name__ == '__main__':
     # TODO marc: turn this into a real test
-    print(Principal("marc"))
-    print(Principal(("marc", None)))
-    print(Principal((("marc",), None)))
-    print(Principal("marc@ATHENA.MIT.EDU"))
-    print(Principal("marc", default_realm="ATHENA.MIT.EDU"))
-    print(Principal("marc@ATHENA.MIT.EDU", default_realm="EXAMPLE.COM"))
-    print(Principal(("marc", "ATHENA.MIT.EDU")))
-    print(Principal((("marc"), "ATHENA.MIT.EDU")))
-    print(Principal("marc/root"))
-    print(Principal(("marc", "root", "ATHENA.MIT.EDU")))
-    print(Principal((("marc", "root"), "ATHENA.MIT.EDU")))
-    print(Principal("marc\\/root"))
+    print((Principal("marc")))
+    print((Principal(("marc", None))))
+    print((Principal((("marc",), None))))
+    print((Principal("marc@ATHENA.MIT.EDU")))
+    print((Principal("marc", default_realm="ATHENA.MIT.EDU")))
+    print((Principal("marc@ATHENA.MIT.EDU", default_realm="EXAMPLE.COM")))
+    print((Principal(("marc", "ATHENA.MIT.EDU"))))
+    print((Principal((("marc"), "ATHENA.MIT.EDU"))))
+    print((Principal("marc/root")))
+    print((Principal(("marc", "root", "ATHENA.MIT.EDU"))))
+    print((Principal((("marc", "root"), "ATHENA.MIT.EDU"))))
+    print((Principal("marc\\/root")))

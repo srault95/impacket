@@ -202,14 +202,14 @@ class ICMP6(Header):
         well_formed = True
         
         #Check that the message type is known
-        well_formed &= self.get_type() in self.icmp_messages.keys()
+        well_formed &= self.get_type() in list(self.icmp_messages.keys())
         
         #Check that the code is known (zero, if there are no codes defined)
         code_dictionary = self.icmp_messages[self.get_type()][self.CODES_INDEX]
         if (code_dictionary is None):
             well_formed &= self.get_code() == 0
         else:            
-            well_formed &= self.get_code() in code_dictionary.keys()
+            well_formed &= self.get_code() in list(code_dictionary.keys())
             
         return well_formed 
         

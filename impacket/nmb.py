@@ -31,9 +31,9 @@
 #
 # Altered source done by Alberto Solino (@agsolino)
 
-from __future__ import division
-from __future__ import print_function
-from __future__ import absolute_import
+
+
+
 import errno
 import re
 import select
@@ -181,7 +181,7 @@ def encode_name(name, nametype, scope):
     encoded_name = chr(len(name) * 2) + re.sub('.', _do_first_level_encoding, name)
 
     try:
-        if isinstance(encoded_name, unicode):
+        if isinstance(encoded_name, str):
             encoded_name = encoded_name.encode('utf-8')
     except NameError:
         pass
@@ -312,7 +312,7 @@ class NBNodeStatusResponse(NBNSResourceRecord):
         self.set_mac_in_hexa(self.statistics['UNIT_ID'])
 
     def set_mac_in_hexa(self, data):
-        data_aux = u''
+        data_aux = ''
         for d in bytearray(data):
             if data_aux == '':
                 data_aux = '%02x' % d

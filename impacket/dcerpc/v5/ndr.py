@@ -12,8 +12,8 @@
 # [X] Unions and rest of the structured types
 # [ ] Documentation for this library, especially the support for Arrays
 #
-from __future__ import division
-from __future__ import print_function
+
+
 import random
 import inspect
 from struct import pack, unpack, calcsize
@@ -1461,7 +1461,7 @@ class NDRUNION(NDRCONSTRUCTEDTYPE):
                 align = tmpAlign
 
         if self._isNDR64:
-            for fieldName, fieldTypeOrClass in self.union.values():
+            for fieldName, fieldTypeOrClass in list(self.union.values()):
                 tmpAlign = fieldTypeOrClass(isNDR64 = self._isNDR64).getAlignment()
                 if tmpAlign > align:
                     align = tmpAlign

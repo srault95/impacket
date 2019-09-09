@@ -38,8 +38,8 @@
 # [x] Do chained AndX requests
 # [ ] Transform the rest of the calls to structure
 # [X] Implement TRANS/TRANS2 reassembly for list_path
-from __future__ import division
-from __future__ import print_function
+
+
 import os
 import socket
 from binascii import a2b_hex

@@ -9,8 +9,8 @@
 # Description:
 #   SPNEGO functions used by SMB, SMB2/3 and DCERPC
 #
-from __future__ import division
-from __future__ import print_function
+
+
 from struct import pack, unpack, calcsize
 
 ############### GSS Stuff ################
@@ -32,7 +32,7 @@ b'*\x86H\x86\xf7\x12\x01\x02\x02\x03': 'KRB5 - Kerberos 5 - User to User',
 b'\x2b\x06\x01\x04\x01\x82\x37\x02\x02\x1e': 'NEGOEX - SPNEGO Extended Negotiation Security Mechanism'
 }
 
-TypesMech = dict((v,k) for k, v in MechTypes.items())
+TypesMech = dict((v,k) for k, v in list(MechTypes.items()))
 
 def asn1encode(data = ''):
         #res = asn1.SEQUENCE(str).encode()

@@ -25,8 +25,8 @@
 # [X] Implement a ping mechanism, otherwise the garbage collector at the server shuts down the objects if 
 #    not used, returning RPC_E_DISCONNECTED
 #
-from __future__ import division
-from __future__ import print_function
+
+
 import socket
 from struct import pack
 from threading import Timer, currentThread

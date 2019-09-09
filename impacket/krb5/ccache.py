@@ -13,8 +13,8 @@
 #   Pretty lame and quick implementation, not a fun thing to do
 #   Contribution is welcome to make it the right way
 #
-from __future__ import division
-from __future__ import print_function
+
+
 from datetime import datetime
 from struct import pack, unpack, calcsize
 from six import b

@@ -13,11 +13,11 @@
 # Description:
 #             This is the SMB server which relays the connections
 #   to other protocols
-from __future__ import division
-from __future__ import print_function
+
+
 from threading import Thread
 try:
-    import ConfigParser
+    import configparser
 except ImportError:
     import configparser as ConfigParser
 import struct
@@ -57,7 +57,7 @@ class SMBRelayServer(Thread):
         self.proxyTranslator = None
 
         # Here we write a mini config for the server
-        smbConfig = ConfigParser.ConfigParser()
+        smbConfig = configparser.ConfigParser()
         smbConfig.add_section('global')
         smbConfig.set('global','server_name','server_name')
         smbConfig.set('global','server_os','UNIX')

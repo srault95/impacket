@@ -18,7 +18,7 @@ import ssl
 try:
     from http.client import HTTPConnection, HTTPSConnection, ResponseNotReady
 except ImportError:
-    from httplib import HTTPConnection, HTTPSConnection, ResponseNotReady
+    from http.client import HTTPConnection, HTTPSConnection, ResponseNotReady
 import base64
 
 from struct import unpack

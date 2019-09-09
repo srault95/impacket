@@ -400,5 +400,5 @@ class SimpleConfig(ProtocolPacket):
     def build_tlv_container(cls):
         return TLVContainer(
             builders=SimpleConfig.BUILDERS, 
-            descs = dict( (v,k) for (k,v) in SCElem.__dict__.items() )
+            descs = dict( (v,k) for (k,v) in list(SCElem.__dict__.items()) )
         )

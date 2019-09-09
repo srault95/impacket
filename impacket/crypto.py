@@ -16,8 +16,8 @@
 #   [MS-LSAD] Section 5.1.2
 #   [MS-SAMR] Section 2.2.11.1.1
 
-from __future__ import division
-from __future__ import print_function
+
+
 from impacket import LOG
 try:
     from Cryptodome.Cipher import DES, AES

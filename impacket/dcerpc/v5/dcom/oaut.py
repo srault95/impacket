@@ -19,8 +19,8 @@
 #   classes described in the standards developed. 
 #   There are test cases for them too. 
 #
-from __future__ import division
-from __future__ import print_function
+
+
 import random
 from struct import pack, unpack
 
