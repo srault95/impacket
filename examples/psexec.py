@@ -88,7 +88,7 @@ class PSEXEC:
                                          self.__nthash, self.__aesKey)
 
         rpctransport.set_kerberos(self.__doKerberos, self.__kdcHost)
-        self.doStuff(rpctransport)
+        return self.doStuff(rpctransport)
 
     def openPipe(self, s, tid, pipe, accessMask):
         pipeReady = False
@@ -119,10 +119,12 @@ class PSEXEC:
                 import traceback
                 traceback.print_exc()
             logging.critical(str(e))
-            sys.exit(1)
+            raise
+            #sys.exit(1)
 
         global dialect
         dialect = rpctransport.get_smb_connection().getDialect()
+        installService = None
 
         try:
             unInstalled = False
@@ -137,7 +139,8 @@ class PSEXEC:
                     f = open(self.__exeFile)
                 except Exception as e:
                     logging.critical(str(e))
-                    sys.exit(1)
+                    raise
+                    #sys.exit(1)
                 installService = serviceinstall.ServiceInstall(rpctransport.get_smb_connection(), f)
     
             if installService.install() is False:
@@ -197,7 +200,10 @@ class PSEXEC:
                 # We copied a file for execution, let's remove it
                 s.deleteFile(installService.getShare(), os.path.basename(self.__copyFile))
             unInstalled = True
-            sys.exit(retCode['ErrorCode'])
+            #sys.exit(retCode['ErrorCode'])
+            stdout_pipe.join() # timeout
+            stderr_pipe.join() # timeout
+            return retCode, stdout_pipe.data, stderr_pipe.data
 
         except SystemExit:
             raise
@@ -206,12 +212,13 @@ class PSEXEC:
                 import traceback
                 traceback.print_exc()
             logging.debug(str(e))
-            if unInstalled is False:
+            if unInstalled is False and installService:
                 installService.uninstall()
                 if self.__copyFile is not None:
                     s.deleteFile(installService.getShare(), os.path.basename(self.__copyFile))
             sys.stdout.flush()
-            sys.exit(1)
+            raise
+            #sys.exit(1)
 
 class Pipes(Thread):
     def __init__(self, transport, pipe, permissions, share=None):
@@ -255,6 +262,7 @@ class Pipes(Thread):
 class RemoteStdOutPipe(Pipes):
     def __init__(self, transport, pipe, permisssions):
         Pipes.__init__(self, transport, pipe, permisssions)
+        data = []
 
     def run(self):
         self.connectPipe()
@@ -267,8 +275,9 @@ class RemoteStdOutPipe(Pipes):
                 try:
                     global LastDataSent
                     if ans != LastDataSent:
-                        sys.stdout.write(ans.decode('cp437'))
-                        sys.stdout.flush()
+                        self.data.append(ans.decode('cp437'))
+                        #sys.stdout.write(ans.decode('cp437'))
+                        #sys.stdout.flush()
                     else:
                         # Don't echo what I sent, and clear it up
                         LastDataSent = ''
@@ -282,6 +291,7 @@ class RemoteStdOutPipe(Pipes):
 class RemoteStdErrPipe(Pipes):
     def __init__(self, transport, pipe, permisssions):
         Pipes.__init__(self, transport, pipe, permisssions)
+        data = []
 
     def run(self):
         self.connectPipe()
@@ -292,8 +302,9 @@ class RemoteStdErrPipe(Pipes):
                 pass
             else:
                 try:
-                    sys.stderr.write(str(ans))
-                    sys.stderr.flush()
+                    self.data.append(str(ans))
+                    #sys.stderr.write(str(ans))
+                    #sys.stderr.flush()
                 except:
                     pass
 
@@ -493,6 +504,9 @@ if __name__ == '__main__':
     if command == ' ':
         command = 'cmd.exe'
 
+    print(locals())
+
     executer = PSEXEC(command, options.path, options.file, options.c, int(options.port), username, password, domain, options.hashes,
                       options.aesKey, options.k, options.dc_ip, options.service_name)
-    executer.run(remoteName, options.target_ip)
+    result = executer.run(remoteName, options.target_ip)
+    print(result)
