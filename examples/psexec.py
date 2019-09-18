@@ -201,6 +201,7 @@ class PSEXEC:
                 s.deleteFile(installService.getShare(), os.path.basename(self.__copyFile))
             unInstalled = True
             #sys.exit(retCode['ErrorCode'])
+            stdin_pipe.join()
             stdout_pipe.join() # timeout
             stderr_pipe.join() # timeout
             return retCode, stdout_pipe.data, stderr_pipe.data
